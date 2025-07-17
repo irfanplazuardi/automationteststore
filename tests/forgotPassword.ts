@@ -4,6 +4,7 @@ import { faker } from '@faker-js/faker'
 
 test.describe('Forgot Password', () => {
     test.beforeEach(async ({page, homePage})=> {
+        await page.context().clearCookies();
         await page.goto('/');
         await homePage.clickRegisterLogin()
     });

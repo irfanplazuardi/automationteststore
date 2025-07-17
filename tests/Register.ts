@@ -6,6 +6,7 @@ test.describe('Register', () => {
   const firstName = faker.person.firstName()
   
   test.beforeEach(async ({page, homePage, loginPage}) => {
+    await page.context().clearCookies();
     await page.goto('/');
     await homePage.clickRegisterLogin()
     await loginPage.clickContinueRegister()

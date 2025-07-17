@@ -3,6 +3,7 @@ import { test } from '../pages/fixture';
 
 test.describe('Login', () => {
     test.beforeEach(async ({page, homePage})=> {
+        await page.context().clearCookies();
         await page.goto('/');
         await homePage.clickRegisterLogin()
     });
@@ -26,5 +27,6 @@ test.describe('Login', () => {
         await loginPage.inputPassword(process.env.PASSWORD!)
         await loginPage.clickLogin()
         await expect(page.locator('h1').getByText('My Account')).toBeVisible();
+        await expect(page.locator('.menu_text').getByText(`Welcome back ${process.env.FIRST_NAME}`)).toBeVisible();
     });
 })

@@ -17,7 +17,6 @@ export class RegisterPage {
     readonly loginName: Locator
     readonly password: Locator
     readonly passwordConfirm: Locator
-    // readonly subscribe: Locator
     readonly agreeCheckbox: Locator
     readonly continue: Locator
    
@@ -38,7 +37,6 @@ export class RegisterPage {
         this.loginName = page.locator('#AccountFrm_loginname')
         this.password = page.locator('#AccountFrm_password')
         this.passwordConfirm = page.locator('#AccountFrm_confirm')
-        // this.subscribe = page.locator(`input[name="newsletter"][value=${value}]`)
         this.agreeCheckbox = page.locator('#AccountFrm_agree')
         this.continue = page.getByRole('button', {name: 'Continue'})
     }
@@ -85,7 +83,6 @@ export class RegisterPage {
         await this.company.fill(company)
         await this.address1.fill(address1)
         await this.address2.fill(address2)
-        // await this.country.selectOption({label: country})
         if (country !== "United Kingdom") {
             await this.country.selectOption({label: country})
         }

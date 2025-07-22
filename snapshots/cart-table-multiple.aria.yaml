@@ -1,0 +1,72 @@
+- table:
+  - rowgroup:
+    - row "Image Name Model Unit Price Quantity Total Remove":
+      - cell "Image"
+      - cell "Name"
+      - cell "Model"
+      - cell "Unit Price"
+      - cell "Quantity"
+      - cell "Total"
+      - cell "Remove"
+    - row "Skinsheen Bronzer Stick 558003 $29.50 1 $29.50 ":
+      - cell:
+        - link:
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=50&key=50
+      - cell "Skinsheen Bronzer Stick":
+        - link "Skinsheen Bronzer Stick":
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=50&key=50
+      - cell "558003"
+      - cell "$29.50"
+      - cell "1":
+        - textbox: "1"
+      - cell "$29.50"
+      - cell "":
+        - link "":
+          - /url: https://automationteststore.com/index.php?rt=checkout/cart&remove=50
+    - row "Brunette expressions Conditioner PCND002 $24.00 1 $24.00 ":
+      - cell:
+        - link:
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=72&key=72
+      - cell "Brunette expressions Conditioner":
+        - link "Brunette expressions Conditioner":
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=72&key=72
+      - cell "PCND002"
+      - cell "$24.00"
+      - cell "1":
+        - textbox: "1"
+      - cell "$24.00"
+      - cell "":
+        - link "":
+          - /url: https://automationteststore.com/index.php?rt=checkout/cart&remove=72
+    - row "Acqua Di Gio Pour Homme - Fragrance Size 6.7 oz GRM001 $90.00 1 $90.00 ":
+      - cell:
+        - link:
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=80&key=80:566e369e4e654a4ab9401496a3c60d72
+      - cell "Acqua Di Gio Pour Homme - Fragrance Size 6.7 oz":
+        - link "Acqua Di Gio Pour Homme":
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=80&key=80:566e369e4e654a4ab9401496a3c60d72
+        - text: "- Fragrance Size 6.7 oz"
+      - cell "GRM001"
+      - cell "$90.00"
+      - cell "1":
+        - textbox: "1"
+      - cell "$90.00"
+      - cell "":
+        - link "":
+          - /url: https://automationteststore.com/index.php?rt=checkout/cart&remove=80:566e369e4e654a4ab9401496a3c60d72
+    - row "New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals - UK size 6 UK - Colour red $26.00 1 $26.00 ":
+      - cell:
+        - link:
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=116&key=116:5b4842b951224fd0616bca4a7b1d0c49
+      - cell "New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals - UK size 6 UK - Colour red":
+        - link "New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals":
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=116&key=116:5b4842b951224fd0616bca4a7b1d0c49
+        - text: "- UK size 6 UK - Colour red"
+      - cell
+      - cell "$26.00"
+      - cell "1":
+        - textbox: "1"
+      - cell "$26.00"
+      - cell "":
+        - link "":
+          - /url: https://automationteststore.com/index.php?rt=checkout/cart&remove=116:5b4842b951224fd0616bca4a7b1d0c49

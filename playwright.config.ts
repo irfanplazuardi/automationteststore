@@ -16,6 +16,9 @@ export default defineConfig({
   testMatch: "**/*.ts",
   expect: {
     timeout: 6000000,
+    toMatchAriaSnapshot: {
+      pathTemplate:'./snapshots/{arg}.aria.yaml'
+    }
   },
   /* Run tests in files in parallel */
   fullyParallel: true,

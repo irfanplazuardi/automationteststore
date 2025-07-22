@@ -1,0 +1,24 @@
+ - rowgroup:
+    - row "Image Name Model Unit Price Quantity Total Remove":
+      - cell "Image"
+      - cell "Name"
+      - cell "Model"
+      - cell "Unit Price"
+      - cell "Quantity"
+      - cell "Total"
+      - cell "Remove"
+    - row "Skinsheen Bronzer Stick 558003 $29.50 1 $29.50 ":
+      - cell:
+        - link:
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=50&key=50
+      - cell "Skinsheen Bronzer Stick":
+        - link "Skinsheen Bronzer Stick":
+          - /url: https://automationteststore.com/index.php?rt=product/product&product_id=50&key=50
+      - cell "558003"
+      - cell "$29.50"
+      - cell "1":
+        - textbox: "1"
+      - cell "$29.50"
+      - cell "":
+        - link "":
+          - /url: https://automationteststore.com/index.php?rt=checkout/cart&remove=50

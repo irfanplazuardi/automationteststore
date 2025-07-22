@@ -4,6 +4,7 @@ import { LoginPage } from './loginPage'
 import { RegisterPage } from './registerPage'
 import { AccountPage } from './accountPage'
 import { ForgotPasswordPage } from './forgotPasswordPage'
+import { CartPage } from './CartPage'
 
 type PageFixture = {
     homePage: HomePage
@@ -11,6 +12,7 @@ type PageFixture = {
     registerPage: RegisterPage
     accountPage: AccountPage
     forgotPasswordPage: ForgotPasswordPage
+    cartPage: CartPage
 }
 
 export const test = base.extend<PageFixture>({
@@ -28,5 +30,8 @@ export const test = base.extend<PageFixture>({
   },
   forgotPasswordPage: async ({page}, use) => {
     await use(new ForgotPasswordPage(page))
+  },
+  cartPage: async ({page}, use) => {
+    await use(new CartPage(page))
   }
 });

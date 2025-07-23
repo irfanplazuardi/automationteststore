@@ -1,0 +1,16 @@
+- heading " Your Order Has Been Processed!" [level=1]
+- paragraph
+- paragraph: Your order has been successfully processed!
+- paragraph:
+  - text: You can view your order details by going to the
+  - link "invoice page"
+  - text: .
+- paragraph:
+  - text: Please direct any questions you have to the
+  - link "store owner":
+    - /url: https://automationteststore.com/index.php?rt=content/contact
+  - text: .
+- paragraph: Thank you for shopping with us!
+- paragraph
+- link " Continue":
+  - /url: https://automationteststore.com/

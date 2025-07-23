@@ -8,6 +8,7 @@ export class LoginPage {
     readonly login: Locator
     readonly forgetPassword: Locator
     readonly forgetYourLogin: Locator
+    readonly guestCheckout: Locator
 
     constructor(page: Page) {
         this.page = page;
@@ -17,9 +18,10 @@ export class LoginPage {
         this.login = page.getByRole('button',{name: 'Login' })
         this.forgetPassword = page.getByRole('link', {name: 'Forgot your password?'})
         this.forgetYourLogin = page.getByRole('link', {name: 'Forgot your login?'})
+        this.guestCheckout = page.getByRole('radio', {name:'Guest Checkout'})
     }
 
-    async clickContinueRegister() {
+    async clickContinue() {
         await this.continueRegister.click()
     }
 
@@ -40,5 +42,9 @@ export class LoginPage {
 
     async clickForgetLoginName() {
         await this.forgetYourLogin.click()
+    }
+
+    async selectGuestCheckout() {
+        await this.guestCheckout.click()
     }
 }

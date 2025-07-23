@@ -6,29 +6,34 @@ export class CartPage {
     readonly update: Locator;
     readonly checkout: Locator;
     readonly continueShopping: Locator
-    readonly returnHome
-    
+    readonly returnHome: Locator
+    readonly shipmentCountry: Locator
+    readonly shipmentRegion: Locator
+    readonly shipmentPostCode: Locator
+    readonly shipmentEstimation: Locator
+    readonly shipmentRate: Locator
+    readonly totalShipment: Locator
+    readonly grandTotal: Locator
 
     constructor(page: Page) {
         this.page = page;
         this.cartTable = page.locator('table.table-bordered').first()
         this.update = page.getByRole('button', { name: 'Update' });
-        this.checkout = page.getByRole('link', { name: 'Checkout' });
+        this.checkout = page.getByRole('link', { name: 'Checkout' }).last();
         this.continueShopping = page.getByRole('link', { name: 'Continue Shopping' })
         this.returnHome = page.getByRole('link', { name: 'Home' }).last()
+        this.shipmentCountry = page.locator('#estimate_country')
+        this.shipmentRegion = page.locator('#estimate_country_zones')
+        this.shipmentPostCode = page.locator('#estimate_postcode')
+        this.shipmentEstimation = page.getByRole('button', { name: 'Estimate' })
+        this.shipmentRate = page.locator('#shippings')
+        this.totalShipment = page.locator('#totals_table tr').nth(1)
+        this.grandTotal = page.locator('#totals_table tr').nth(2)
     }
 
     async assertCartItemQuantityBubble (items: number){
       await expect(this.page.getByRole('link', {name: /.*Items\s*-\s*\$.*/})).toContainText(`${items}`)
     }
-
-    // async assertPrice () {
-    //   const productCard = this.page.locator('.col-md-3.col-sm-6.col-xs-12', {
-    //     has: this.page.locator('a.prdocutname', { hasText: productName })
-    // }).first();
-
-    // const price
-    // }
 
     async assertCartTable(file: string) {
       await expect(this.cartTable).toMatchAriaSnapshot({name: file})
@@ -124,6 +129,47 @@ export class CartPage {
       console.log(`subtotal = ${displayedSubTotal}`)
       expect(calculatedSum).toBe(displayedSubTotal);
     }
+
+    async selectShipmentCountry(country: string){
+       if (country !== "United Kingdom") {
+            await this.shipmentCountry.selectOption({label: country})
+        }
+    }
+
+    async selectShipmentRegion(region: string){
+      await this.shipmentRegion.selectOption({label: region})
+    }
+
+    async inputPostCode(code: string){
+      await this.shipmentPostCode.fill(code)
+    }
+
+    async clickEstimateShipmentRate(){
+      await this.shipmentEstimation.click()
+      await expect(this.shipmentRate).toBeVisible()
+    }
+
+    async selectShipmentRate(rate: string){
+      await this.shipmentRate.selectOption({label: rate})
+      await expect(this.totalShipment.getByText(/\$\d+(\.\d{2})?/)).toBeVisible()
+    }
+
+    async assertGrandTotal(){
+      const rowLocator = this.page.locator('#totals_table tr');
+      
+      const subTotalText = await rowLocator.nth(0).getByText(/\$\d+(\.\d{2})?/).innerText();
+      const shippingText = await rowLocator.nth(1).getByText(/\$\d+(\.\d{2})?/).innerText();
+      const grandTotalText = await rowLocator.nth(2).getByText(/\$\d+(\.\d{2})?/).innerText();
+
+      const subTotal = parseFloat(subTotalText.replace('$', ''))
+      const shipping = parseFloat(shippingText.replace('$', ''))
+      const grandTotal = parseFloat(grandTotalText.replace('$', ''))
+
+      const calculatedSum = subTotal + shipping
+      expect(calculatedSum).toBe(grandTotal)
+      console.log(`subTotal = ${subTotal} ; shipping = ${shipping} ; calulatedSum =${calculatedSum}; grandTotal = ${grandTotal}`)
+    }
+    
 
 
 

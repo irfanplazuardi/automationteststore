@@ -35,12 +35,10 @@ test.describe('Add to cart account logout', () => {
         await expect(page.locator('#cart')).toContainText('Brunette expressions Conditioner');
         await expect(page.locator('#cart')).toContainText('Acqua Di Gio Pour Homme');
         await expect(page.locator('#cart')).toContainText('New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals');
-        // const snapshot = await cartPage.cartTable.ariaSnapshot()
-        // console.log(snapshot)
         await cartPage.assertCartTable('cart-table-multiple')
     });
 
-    test('Update and remove items in cart', async ({page, homePage, cartPage}) => {
+    test('Update and remove items in cart', async ({homePage, cartPage}) => {
         await homePage.addToCartByName('Skinsheen Bronzer Stick')
         await cartPage.assertCartItemQuantityBubble(1)
         await homePage.addToCartByName('Brunette expressions Conditioner')

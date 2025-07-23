@@ -9,7 +9,7 @@ test.describe('Register', () => {
     await page.context().clearCookies();
     await page.goto('/');
     await homePage.clickRegisterLogin()
-    await loginPage.clickContinueRegister()
+    await loginPage.clickContinue()
   });
 
   test('Register with already reagistered account', async({page, registerPage}) => {

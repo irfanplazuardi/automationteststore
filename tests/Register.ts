@@ -1,6 +1,7 @@
 import { expect} from '@playwright/test';
 import { test } from '../pages/fixture';
-import { faker } from '@faker-js/faker'
+import { faker } from '@faker-js/faker';
+import { qase } from 'playwright-qase-reporter';
 
 test.describe('Register', () => {
   const firstName = faker.person.firstName()
@@ -12,7 +13,7 @@ test.describe('Register', () => {
     await loginPage.clickContinue()
   });
 
-  test('Register with already reagistered account', async({page, registerPage}) => {
+  test(qase(1,'Register with already reagistered account'), async({page, registerPage}) => {
     await registerPage.inputForm({
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
@@ -36,7 +37,7 @@ test.describe('Register', () => {
     await expect(page.locator('.alert-error')).toContainText('Error: E-Mail Address is already registered!')
   })
 
-  test('Register with all field empty', async ({page, registerPage})=> {
+  test(qase(2,'Register with all field empty'), async ({page, registerPage})=> {
     await registerPage.buttonContinue()
     await expect(page.getByText('First Name must be between 1 and 32 characters!')).toBeVisible()
     await expect(page.getByText('Last Name must be between 1 and 32 characters!')).toBeVisible()
@@ -50,7 +51,7 @@ test.describe('Register', () => {
     await expect(page.getByText('Error: You must agree to the Privacy Policy!')).toBeVisible()    
   });
 
-  test('Register with already used login name', async({page, registerPage}) => {
+  test(qase(3,'Register with already used login name'), async({page, registerPage}) => {
     await registerPage.inputForm({
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
@@ -74,7 +75,7 @@ test.describe('Register', () => {
     await expect(page.locator('.alert-error')).toContainText('This login name is not available. Try different login name!')
   })
 
-  test('Register with not matching password', async({page, registerPage}) => {
+  test(qase(4,'Register with not matching password'), async({page, registerPage}) => {
     await registerPage.inputForm({
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
@@ -98,7 +99,7 @@ test.describe('Register', () => {
     await expect(page.locator('.alert-error')).toContainText('Password confirmation does not match password!')
   })
 
-  test('Register with input required fields only', async({page, registerPage, accountPage}) => {
+  test(qase(5,'Register with input required fields only'), async({page, registerPage, accountPage}) => {
     await registerPage.inputForm({
       firstName: firstName,
       lastName: faker.person.lastName(),
@@ -124,7 +125,7 @@ test.describe('Register', () => {
     await expect(page.getByText(firstName, { exact: true })).toBeVisible();
   })
 
-  test('Register with input all fields', async({page, registerPage, accountPage}) => {
+  test(qase(6,'Register with input all fields'), async({page, registerPage, accountPage}) => {
     await registerPage.inputForm({
       firstName: firstName,
       lastName: faker.person.lastName(),

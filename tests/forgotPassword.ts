@@ -1,6 +1,7 @@
 import { expect} from '@playwright/test';
 import { test } from '../pages/fixture';
-import { faker } from '@faker-js/faker'
+import { faker } from '@faker-js/faker';
+import { qase } from 'playwright-qase-reporter';
 
 test.describe('Forgot Password', () => {
     test.beforeEach(async ({page, homePage})=> {
@@ -9,7 +10,7 @@ test.describe('Forgot Password', () => {
         await homePage.clickRegisterLogin()
     });
 
-    test('Forgot login name with not registered last name or email address', async ({page, loginPage, forgotPasswordPage}) => {
+    test(qase(10,'Forgot login name with not registered last name or email address'), async ({page, loginPage, forgotPasswordPage}) => {
         await loginPage.clickForgetLoginName()
         await forgotPasswordPage.inputLastName(faker.person.lastName())
         await forgotPasswordPage.inputEmail(faker.internet.email())
@@ -28,7 +29,7 @@ test.describe('Forgot Password', () => {
         await expect(page.locator('.alert-danger')).toHaveCSS('color', 'rgb(169, 68, 66)')
     });
 
-    test('Forgot login name with valid last name and email address', async ({page, loginPage, forgotPasswordPage}) => {
+    test(qase(11,'Forgot login name with valid last name and email address'), async ({page, loginPage, forgotPasswordPage}) => {
         await loginPage.clickForgetLoginName()
         await forgotPasswordPage.inputLastName(`${process.env.LAST_NAME}`)
         await forgotPasswordPage.inputEmail(`${process.env.EMAIL}`)
@@ -39,7 +40,7 @@ test.describe('Forgot Password', () => {
         await expect(page.getByRole('link', {name: 'Forgot your password?'})).toBeVisible()
     });
 
-    test('forgot password with not registered login name or email address', async ({page, loginPage, forgotPasswordPage}) => {
+    test(qase(12,'Forgot password with not registered login name or email address'), async ({page, loginPage, forgotPasswordPage}) => {
         await loginPage.clickForgetPassword()
         await forgotPasswordPage.inputLoginName(faker.internet.username())
         await forgotPasswordPage.inputEmail(faker.internet.email())
@@ -57,7 +58,7 @@ test.describe('Forgot Password', () => {
         await expect(page.getByText('Error: No records found matching information your provided, please check your information and try again!')).toBeVisible();
         await expect(page.locator('.alert-danger')).toHaveCSS('color', 'rgb(169, 68, 66)')
     });
-     test('Forgot login password with valid login name and email address', async ({page, loginPage, forgotPasswordPage}) => {
+     test(qase(13,'Forgot login password with valid login name and email address'), async ({page, loginPage, forgotPasswordPage}) => {
         await loginPage.clickForgetPassword()
         await forgotPasswordPage.inputLoginName(`${process.env.LOGIN_NAME}`)
         await forgotPasswordPage.inputEmail(`${process.env.EMAIL}`)

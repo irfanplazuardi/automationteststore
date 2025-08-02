@@ -8,8 +8,11 @@
     "@playwright/test": "^1.53.2",
     "@types/node": "^24.0.12"
   },
-  "scripts": {},
+  "scripts": {
+    "test:qase": "QASE_MODE=testops npx playwright test"
+  },
   "dependencies": {
-    "dotenv": "^17.2.0"
+    "dotenv": "^17.2.0",
+    "playwright-qase-reporter": "^2.1.4"
   }
 }

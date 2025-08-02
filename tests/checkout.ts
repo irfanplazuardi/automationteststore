@@ -1,14 +1,15 @@
 import { expect} from '@playwright/test';
 import { test } from '../pages/fixture';
 import { faker } from '@faker-js/faker';
+import { qase } from 'playwright-qase-reporter';
 
-test.describe('checkout with account logout', () => {
+test.describe('Checkout with account logout', () => {
     test.beforeEach(async ({page})=> {
         await page.context().clearCookies();
         await page.goto('/');
     });
 
-    test('checkout item as guest', async ({page, homePage, cartPage, checkoutPage, loginPage}) => {
+    test(qase(17,'Checkout item as guest'), async ({page, homePage, cartPage, checkoutPage, loginPage}) => {
         await homePage.addToCartByName('Skinsheen Bronzer Stick')
         await cartPage.assertCartItemQuantityBubble(1)
         await homePage.addToCartByName('Brunette expressions Conditioner')
@@ -46,7 +47,7 @@ test.describe('checkout with account logout', () => {
         await expect(page.getByRole('link', { name: 'Home' })).toHaveCSS('background-color', 'rgb(0, 161, 203)')
     });
 
-     test('checkout item by register account', async ({page, homePage, cartPage, checkoutPage, loginPage, registerPage}) => {
+     test(qase(18,'Checkout item by register account'), async ({page, homePage, cartPage, checkoutPage, loginPage, registerPage}) => {
         await homePage.addToCartByName('Skinsheen Bronzer Stick')
         await cartPage.assertCartItemQuantityBubble(1)
         await homePage.addToCartByName('Brunette expressions Conditioner')
@@ -87,7 +88,7 @@ test.describe('checkout with account logout', () => {
         await expect(page.getByRole('link', { name: 'Home' })).toHaveCSS('background-color', 'rgb(0, 161, 203)')
     });
 
-     test('checkout item by login', async ({page, homePage, cartPage, checkoutPage, loginPage}) => {
+     test(qase(19,'Checkout item by login'), async ({page, homePage, cartPage, checkoutPage, loginPage}) => {
         await homePage.addToCartByName('Skinsheen Bronzer Stick')
         await cartPage.assertCartItemQuantityBubble(1)
         await homePage.addToCartByName('Brunette expressions Conditioner')
@@ -112,12 +113,12 @@ test.describe('checkout with account logout', () => {
     });
 })
 
-test.describe('checkout with account already login', async () => {
+test.describe('Checkout with account already login', async () => {
     test.beforeEach(async ({page})=> {
         await page.goto('/');
     });
 
-    test('checkout item already login', async ({page, homePage, cartPage, checkoutPage, loginPage}) => {
+    test(qase(20,'Checkout item already login'), async ({page, homePage, cartPage, checkoutPage, loginPage}) => {
         await homePage.addToCartByName('Skinsheen Bronzer Stick')
         await cartPage.assertCartItemQuantityBubble(1)
         await homePage.addToCartByName('Brunette expressions Conditioner')

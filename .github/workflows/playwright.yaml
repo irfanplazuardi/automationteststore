@@ -24,6 +24,8 @@ jobs:
       run: yarn install --frozen-lockfile
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Download auth.json from Google Drive
+      run: wget --no-check-certificate "https://drive.google.com/uc?export=download&id=1MZ0yC0qrbN506-B_P8lsyXAjK0x8_64R" -O auth.json
     - name: Run Playwright tests
       run: yarn playwright test
     - uses: actions/upload-artifact@v4

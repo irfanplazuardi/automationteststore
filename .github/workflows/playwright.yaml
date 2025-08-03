@@ -44,10 +44,12 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - name: Download Playwright report artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: playwright-report
+        path: playwright-report
 
     - name: Configure GitHub Pages
       uses: actions/configure-pages@v4

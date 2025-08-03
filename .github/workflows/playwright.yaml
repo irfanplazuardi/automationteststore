@@ -16,16 +16,6 @@ jobs:
       run: yarn install --frozen-lockfile
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    # - name: Create .env file
-    #   run:
-    #     touch .env
-    #     echo "LOGIN_NAME=${{ secrets.LOGIN_NAME }}" >> .env
-    #     echo "PASSWORD=${{ secrets.PASSWORD }}" >> .env
-    #     echo "EMAIL=${{ secrets.EMAIL }}" >> .env
-    #     echo "LAST_NAME=${{ secrets.LAST_NAME }}" >> .env
-    #     echo "FIRST_NAME=${{ secrets.FIRST_NAME }}" >> .env
-    #     echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> .env
-    #     echo "PROJECT_CODE=${{ secrets.PROJECT_CODE }}" >> .env
     - name: Download auth.json from Google Drive
       run: wget --no-check-certificate "https://drive.google.com/uc?export=download&id=1MZ0yC0qrbN506-B_P8lsyXAjK0x8_64R" -O auth.json
     - name: Run Playwright test login
@@ -37,7 +27,7 @@ jobs:
         FIRST_NAME: ${{ secrets.FIRST_NAME}}
         API_TOKEN: ${{ secrets.API_TOKEN}}
         PROJECT_CODE: ${{ secrets.PROJECT_CODE}}
-      run: yarn playwright test login.ts
+      run: yarn test:qase login.ts
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

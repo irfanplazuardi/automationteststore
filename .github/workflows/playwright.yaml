@@ -1,64 +1,60 @@
-name: Playwright Tests
+name: Playwright Tests and Deploy
 on:
   workflow_dispatch:
   push:
     branches: [main]
 permissions:
-  contents: read      
-  pages: write         
-  id-token: write 
+  contents: read
+  pages: write
+  id-token: write
 jobs:
   test:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Download auth.json from Google Drive
-      run: wget --no-check-certificate "https://drive.google.com/uc?export=download&id=1MZ0yC0qrbN506-B_P8lsyXAjK0x8_64R" -O auth.json
-    - name: Run Playwright test login
-      env: 
-        LOGIN_NAME: ${{ secrets.LOGIN_NAME}}
-        PASSWORD: ${{ secrets.PASSWORD}}
-        EMAIL: ${{ secrets.EMAIL}}
-        LAST_NAME: ${{ secrets.LAST_NAME}}
-        FIRST_NAME: ${{ secrets.FIRST_NAME}}
-        API_TOKEN: ${{ secrets.API_TOKEN}}
-        PROJECT_CODE: ${{ secrets.PROJECT_CODE}}
-      run: yarn playwright test login.ts
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
-  deploy:
-    name: Publish to GitHub Pages
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Download auth.json from Google Drive
+        run: wget --no-check-certificate "https://drive.google.com/uc?export=download&id=1MZ0yC0qrbN506-B_P8lsyXAjK0x8_64R" -O auth.json
+      - name: Run Playwright test login
+        env: 
+          LOGIN_NAME: ${{ secrets.LOGIN_NAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          EMAIL: ${{ secrets.EMAIL }}
+          LAST_NAME: ${{ secrets.LAST_NAME }}
+          FIRST_NAME: ${{ secrets.FIRST_NAME }}
+          API_TOKEN: ${{ secrets.API_TOKEN }}
+          PROJECT_CODE: ${{ secrets.PROJECT_CODE }}
+        run: yarn playwright test login.ts
+  build:
     needs: test
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: playwright-report
+          path: ./playwright-report
+
+      - name: Upload site artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./playwright-report
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-    - name: Download Playwright report artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: playwright-report
-        path: playwright-report
-
-    - name: Configure GitHub Pages
-      uses: actions/configure-pages@v4
-
-    - name: Upload report to Pages artifact
-      uses: actions/upload-pages-artifact@v2
-      with:
-        path: playwright-report
-
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v2
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

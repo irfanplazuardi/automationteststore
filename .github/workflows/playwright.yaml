@@ -31,7 +31,7 @@ jobs:
         FIRST_NAME: ${{ secrets.FIRST_NAME}}
         API_TOKEN: ${{ secrets.API_TOKEN}}
         PROJECT_CODE: ${{ secrets.PROJECT_CODE}}
-      run: yarn playwright test login.ts
+      run: yarn test:qase
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

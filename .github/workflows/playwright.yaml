@@ -13,16 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.54.0-noble
-      options: --user 1001
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+        cache: yarn
     - name: Install dependencies
       run: yarn install --frozen-lockfile
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
     - name: Download auth.json from Google Drive
       run: wget --no-check-certificate "https://drive.google.com/uc?export=download&id=1MZ0yC0qrbN506-B_P8lsyXAjK0x8_64R" -O auth.json
     - name: Run Playwright test 

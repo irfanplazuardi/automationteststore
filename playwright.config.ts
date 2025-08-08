@@ -15,7 +15,7 @@ export default defineConfig({
   testDir: "./tests",
   testMatch: "**/*.ts",
   expect: {
-    timeout: 6000000,
+    timeout:  5 * 60 * 1000,
     toMatchAriaSnapshot: {
       pathTemplate:'./snapshots/{arg}.aria.yaml'
     }

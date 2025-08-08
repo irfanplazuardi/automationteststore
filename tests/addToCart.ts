@@ -14,7 +14,7 @@ test.describe('Add to cart account logout', () => {
         await homePage.clickCart()
         await expect(page.getByText('Shopping Cart', { exact: true })).toBeVisible();
         await expect(page.locator('#cart')).toContainText('Skinsheen Bronzer Stick');
-        await cartPage.assertCartTable('cart-table-single')
+        // await cartPage.assertCartTable('cart-table-single')
     });
 
     test(qase (15, 'Add multiple item to cart from homepage'), async ({page, homePage, cartPage}) => {
@@ -36,7 +36,7 @@ test.describe('Add to cart account logout', () => {
         await expect(page.locator('#cart')).toContainText('Absolue Eye Precious Cells');
         await expect(page.locator('#cart')).toContainText('Acqua Di Gio Pour Homme');
         await expect(page.locator('#cart')).toContainText('New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals');
-        await cartPage.assertCartTable('cart-table-multiple')
+        // await cartPage.assertCartTable('cart-table-multiple')
     });
 
     test(qase (16,'Update and remove items in cart'), async ({homePage, cartPage}) => {

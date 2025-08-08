@@ -7,6 +7,14 @@ Welcome to **Automation Test Store Playwright Automation**, a personal end-to-en
 - 🛒 Add to Cart  
 - 💳 Checkout  
 
+This project is fully integrated with Qase.io for test case management—where all test steps are documented, and execution results are automatically updated after every run.
+Additionally, a CI/CD pipeline is set up using GitHub Actions, ensuring tests are executed on every push or manual trigger. The pipeline generates a detailed Playwright HTML report, which is automatically deployed to GitHub Pages for easy access.
+
+📄 Live CI/CD Test Report: [view github page report](https://irfanplazuardi.github.io/automationteststore/)
+
+![qase report](snapshots/qase-report.png)
+![github actions](snapshots/github-action.png)
+
 ## 🚀 Getting Started
 
 ### 1. Clone This Repository
